@@ -126,30 +126,27 @@ class Entrega {
      * És cert que ∃x : ∀y : Q(x, y) -> P(x) ?
      */
     static boolean exercici3(int[] universe, Predicate<Integer> p, BiPredicate<Integer, Integer> q) {
-      for (int x : universe) {
-            boolean elementosy = false;
+      boolean verificar = true;
+        for (int x: universe) {
+            
             for (int y: universe) {
                 
-                if (q.test(x,y)) {
-                    if(p.test(x)) {
-                        elementosy = true;
-                    } else {
-                        elementosy = false;
+                verificar = true;
+                if (q.test(x, y)) {
+                    
+                    if (!p.test(x)) {
+                        
+                        verificar = false;
                         break;
                     }
-                } else {
-                    elementosy = false;
-                    break;
                 }
             }
-            
-            if (elementosy) {
+            if (verificar == true) {
                 return true;
             }
         }
-        return false; //TODO
-        
-    }
+        return verificar != false;
+}
 
     /*
      * És cert que ∃x : ∃!y : ∀z : P(x,z) <-> Q(y,z) ?
