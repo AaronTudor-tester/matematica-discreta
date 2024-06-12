@@ -145,7 +145,7 @@ class Entrega {
                 return true;
             }
         }
-        return verificar != false;
+        return verificar != false; //TODO
 }
 
     /*
