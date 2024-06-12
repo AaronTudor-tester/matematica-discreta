@@ -92,7 +92,7 @@ class Entrega {
             }
         }
         
-         return contador;
+         return contador; //TODO
     }
     
 
@@ -100,7 +100,26 @@ class Entrega {
      * És cert que ∀x : P(x) -> ∃!y : Q(x,y) ?
      */
     static boolean exercici2(int[] universe, Predicate<Integer> p, BiPredicate<Integer, Integer> q) {
-      return false; // TODO
+      for (int x : universe) {
+            if (p.test(x)) {
+                boolean encontrado = false;
+                for (int y : universe) {
+                    if (q.test(x, y)) {
+                        if (encontrado) {
+
+                            return false;
+                        }
+                        encontrado = true;
+                    }
+                }
+
+                if (!encontrado) {
+                    return false;
+                }
+            }
+        }
+
+        return true; //TODO
     }
 
     /*
