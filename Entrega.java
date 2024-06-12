@@ -155,8 +155,33 @@ class Entrega {
      * És cert que ∃x : ∃!y : ∀z : P(x,z) <-> Q(y,z) ?
      */
     static boolean exercici4(int[] universe, BiPredicate<Integer, Integer> p, BiPredicate<Integer, Integer> q) {
-      return false; // TODO
+      for (int x : universe) {
+        
+        int Comunes = 0;
+        
+        for (int y : universe) {
+            
+            boolean coinciden = true;
+            for (int z : universe) {
+                
+                if (p.test(x, z) != q.test(y, z)) {
+                    coinciden = false;
+                    break; 
+                }
+            }
+            
+            if (coinciden) {
+                Comunes++;
+            }
+        }
+        
+        if (Comunes == 1) {
+            return true;
+        }
     }
+    
+    return false; //TODO
+}
 
     /*
      * Aquí teniu alguns exemples i proves relacionades amb aquests exercicis (vegeu `main`)
