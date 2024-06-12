@@ -72,16 +72,16 @@ class Entrega {
      */
     static int exercici1(int n) {
       int contador = 0;
-      int numCombinaciones = 1 << n; // 2^n combinaciones
+      int numCombinaciones = 1 << n; 
 
-        // Iterar sobre todas las combinaciones posibles de valores de verdad
+        
         for (int i = 0; i < numCombinaciones; i++) {
             boolean[] ValorVerd = new boolean[n];
             for (int j = 0; j < n; j++) {
                 ValorVerd[j] = (i & (1 << j)) != 0;
             }
 
-            // Evaluar la proposición anidada
+            
             boolean resultado = ValorVerd[0];
             for (int k = 1; k < ValorVerd.length; k++) {
                 resultado = !resultado || ValorVerd[k];
