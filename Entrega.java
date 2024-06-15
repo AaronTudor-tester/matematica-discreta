@@ -793,7 +793,29 @@ class Entrega {
      * qüestió de segons independentment de l'entrada.
      */
     static int exercici4(int n, int k, int p) {
-      return -1; // TO DO
+      if (p <= 0) {
+            throw new IllegalArgumentException("El valor de p debe ser positivo para el cálculo del módulo.");
+        }
+
+        if (k == 0) {
+            return 1;
+        }
+
+        if (n < 0) {
+            n = n % p + p;
+        } else {
+            n = n % p;
+        }
+
+        int result = 1;
+        while (k > 0) {
+            if (k % 2 == 1) {
+                result = (result * n) % p;
+            }
+            n = (n * n) % p;
+            k /= 2;
+        }
+        return result; // TO DO
     }
 
     /*
