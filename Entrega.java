@@ -596,7 +596,14 @@ class Entrega {
      * Calculau el mínim comú múltiple de `a` i `b`.
      */
     static int exercici1(int a, int b) {
-      return -1; // TO DO
+     int max = Math.max(a, b);
+        int min = Math.min(a, b);
+        int mcm = max;
+
+        while (mcm % min != 0) {
+            mcm += max;
+        }
+        return mcm; //TO DO
     }
 
     /*
