@@ -692,7 +692,94 @@ class Entrega {
      * té solució.
      */
     static boolean exercici3(int a, int b, int c, int d, int m, int n) {
-      return false; // TO DO
+     if (a == 0 || b == 0) {
+            throw new IllegalArgumentException("a y b deben ser distintos de cero.");
+        }
+
+       
+        int mcd_am = euclidesMCD(a, m);
+        int mcd_bn = euclidesMCD(b, n);
+
+       
+        if (c % mcd_am != 0 || d % mcd_bn != 0) {
+            return false;
+        }
+
+        
+        if (euclidesMCD(m, n) == 1) {
+            
+            int[] solucionModuloMN = aplicarTeoremaChinoResto(a, b, c, d, m, n);
+            return solucionModuloMN != null;
+        } else {
+            
+            return false;
+        }
+    }
+
+   
+    static int[] aplicarTeoremaChinoResto(int a, int b, int c, int d, int m, int n) {
+        
+        int[] soluciones = new int[2]; 
+
+        
+        int m1 = m / euclidesMCD(m, n);
+        int m2 = n / euclidesMCD(m, n);
+
+        
+        int m1inv = euclidesExtendido(m1, m2);
+        int m2inv = euclidesExtendido(m2, m1);
+
+        
+        int x = (c * m2 * m2inv + d * m1 * m1inv) % (m * n);
+
+       
+        if (x < 0) {
+            x += m * n;
+        }
+
+        soluciones[0] = x;
+
+        return soluciones;
+    }
+
+    
+    static int euclidesMCD(int x, int y) {
+        while (y != 0) {
+            int temporal = y;
+            y = x % y;
+            x = temporal;
+        }
+        return x;
+    }
+
+    
+    static int euclidesExtendido(int a, int m) {
+         int m0 = m;
+        int y = 0, x = 1;
+
+        if (m == 1) {
+            return 0;
+        }
+
+        while (a > 1) {
+            
+            int q = a / m;
+            int t = m;
+
+           
+            m = a % m;
+            a = t;
+            t = y;
+
+            y = x - q * y;
+            x = t;
+        }
+
+        if (x < 0) {
+            x += m0;
+        }
+
+        return x; // TO DO
     }
 
     /*
