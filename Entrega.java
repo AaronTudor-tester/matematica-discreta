@@ -596,14 +596,18 @@ class Entrega {
      * Calculau el mínim comú múltiple de `a` i `b`.
      */
     static int exercici1(int a, int b) {
-     int max = Math.max(a, b);
-        int min = Math.min(a, b);
-        int mcm = max;
+     int  mcm = Math.abs(a * b) / euclidesMCD(a, b);
+        return mcm;
+    }
 
-        while (mcm % min != 0) {
-            mcm += max;
+    
+    static int euclidesMCD(int x, int y) {
+        while (y != 0) {
+            int temporal = y;
+            y = x % y;
+            x = temporal;
         }
-        return mcm; //TO DO
+        return x; //TO DO
     }
 
     /*
