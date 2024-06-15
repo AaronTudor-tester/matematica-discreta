@@ -620,7 +620,67 @@ class Entrega {
      * Podeu suposar que `n > 1`. Recordau que no no podeu utilitzar la força bruta.
      */
     static int[] exercici2(int a, int b, int n) {
-      return new int[] {}; // TO DO
+      if (n <= 1) {
+            throw new IllegalArgumentException("El valor de n debe ser mayor que 1.");
+        }
+
+       
+        int mcd = euclidesMCD(a, n);
+
+        
+        if (b % mcd != 0) {
+            
+            return new int[] {};
+        }
+
+       
+        int[] solucionParticular = euclidesExtendido(a, n);
+        int x0 = solucionParticular[0];
+        int y0 = solucionParticular[1];
+
+       
+        int x0prim = x0 * (b / mcd) % n;
+        if (x0prim < 0) {
+            x0prim += n; 
+        }
+
+        
+        int[] soluciones = new int[mcd];
+        for (int k = 0; k < mcd; k++) {
+            soluciones[k] = (x0prim + k * (n / mcd)) % n;
+        }
+
+        return soluciones;
+    }
+
+   
+    static int euclidesMCD(int x, int y) {
+        while (y != 0) {
+            int temporal = y;
+            y = x % y;
+            x = temporal;
+        }
+        return x;
+    }
+
+    
+    static int[] euclidesExtendido(int a, int b) {
+        int x0 = 1, y0 = 0;
+        int x1 = 0, y1 = 1;
+        while (b != 0) {
+            int cociente = a / b;
+            int resto = a % b;
+            a = b;
+            b = resto;
+
+            int tempX = x0 - cociente * x1;
+            int tempY = y0 - cociente * y1;
+            x0 = x1;
+            y0 = y1;
+            x1 = tempX;
+            y1 = tempY;
+        }
+        return new int[]{x0, y0}; // TO DO
     }
 
     /*
